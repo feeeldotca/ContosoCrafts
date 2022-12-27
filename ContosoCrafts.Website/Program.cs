@@ -7,6 +7,7 @@ var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 builder.Services.AddRazorPages();
+builder.Services.AddControllers();
 builder.Services.AddTransient<JsonFileProductService>();
 
 var app = builder.Build();
@@ -27,12 +28,13 @@ app.UseRouting();
 app.UseAuthorization();
 
 app.MapRazorPages();
-app.MapGet("/products", (context) =>
-{
-    var products = app.Services.GetService<JsonFileProductService>().GetProducts();
+app.MapControllers();
+//app.MapGet("/products", (context) =>
+//{
+//    var products = app.Services.GetService<JsonFileProductService>().GetProducts();
    
-    var json = JsonSerializer.Serialize<IEnumerable<Product>>(products);
-    return context.Response.WriteAsync(json);
-});
+//    var json = JsonSerializer.Serialize<IEnumerable<Product>>(products);
+//    return context.Response.WriteAsync(json);
+//});
 
 app.Run();
