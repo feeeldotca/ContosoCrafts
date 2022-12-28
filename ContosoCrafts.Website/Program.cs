@@ -9,7 +9,7 @@ var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddRazorPages();
 builder.Services.AddControllers();
 builder.Services.AddTransient<JsonFileProductService>();
-
+builder.Services.AddServerSideBlazor();
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.
@@ -29,6 +29,7 @@ app.UseAuthorization();
 
 app.MapRazorPages();
 app.MapControllers();
+app.MapBlazorHub();
 //app.MapGet("/products", (context) =>
 //{
 //    var products = app.Services.GetService<JsonFileProductService>().GetProducts();
